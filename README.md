@@ -6,3 +6,4 @@ To Do:
 - Incorporate user-provided transportation methods and distances into the model.
 - Verify support for other combinations of Fuels / Feedstocks.
 - Allow energy and feedstock inputs distinct from the defaults provided by GHGenius.
+- Differentiate waste feedstocks from non-waste feedstocks.
