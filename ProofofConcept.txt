@@ -1,0 +1,74 @@
+Private Sub CommandButton1_Click()
+
+    'Variable Allocation
+    Dim wks1 As Worksheet
+    Dim wks2 As Worksheet
+    Dim wks3 As Worksheet
+    Dim wks4 As Worksheet
+    Dim i As Integer
+    Dim Source As String
+    Dim Fuel As String
+    Dim Stock As String
+    Dim SplitSource() As String
+    Dim Here As Integer
+
+    'Worksheet Initialization
+    Set wks1 = Sheets("SetUp")
+    Set wks2 = Sheets("Input")
+    Set wks3 = Sheets("Upstream Results HHV")
+    Set wks4 = Sheets("Results")
+    
+    'Splitting Fuel Source: Feedstock
+    Source = wks1.Range("B3").Value
+    SplitSource = Split(Source, ": ")
+    Fuel = SplitSource(0)
+    Stock = SplitSource(1)
+    
+    'Output Validation
+    wks1.Range("C3").Value = Fuel
+    wks1.Range("D3").Value = Stock
+
+    'First Run
+    wks2.Range("B4").Value = wks1.Range("B8").Value
+    Call ApplyRegion
+    wks2.Range("B7").Value = wks1.Range("B5")
+    
+    Call Sheet2.InputRun_Click
+    For i = 3 To 15
+        wks4.Cells(i, 4).Value = wks4.Cells(i, 3).Value
+    Next i
+    
+    'Second Run
+    wks2.Range("B4").Value = wks1.Range("C8").Value
+    Call ApplyRegion
+    wks2.Range("B7").Value = wks1.Range("B5")
+    
+    Call Sheet2.InputRun_Click
+    For i = 3 To 15
+        wks4.Cells(i, 5).Value = wks4.Cells(i, 3).Value
+    Next i
+    
+    'Third Run
+    wks2.Range("B4").Value = wks1.Range("D8").Value
+    Call ApplyRegion
+    wks2.Range("B7").Value = wks1.Range("B5")
+    
+    Call Sheet2.InputRun_Click
+    For i = 3 To 15
+        wks4.Cells(i, 6).Value = wks4.Cells(i, 3).Value
+    Next i
+    
+    'Fourth Run
+    wks2.Range("B4").Value = wks1.Range("C8").Value
+    Call ApplyRegion
+    wks2.Range("B7").Value = wks1.Range("B5")
+    
+    Call Sheet2.InputRun_Click
+    For i = 3 To 15
+        wks4.Cells(i, 7).Value = wks4.Cells(i, 3).Value
+    Next i
+    
+    'Result
+    wks1.Range("B1").Value = wks4.Range("H18").Value
+
+End Sub
